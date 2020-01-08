@@ -28,32 +28,32 @@ canvas.height = length;
 var prevRand, nextRand, prevX, prevY, nextX, nextY, x, y;
 
 
-function setup() {
+function setup(resetVertices = true) {
   phi = 2 * Math.PI / nrOfVertices;
   colorIncrement = 360 / nrOfVertices;
-  vertices.length = 0;
+  if (resetVertices) vertices.length = 0;
 
   ctx.clearRect(0, 0, length, length);
 
   ctx.beginPath();
   ctx.lineWidth = "1";
   ctx.strokeStyle = "blue";
-  ctx.arc(lengthHalf, lengthHalf, R, 0, 6.283185307179586)
+  ctx.arc(lengthHalf, lengthHalf, R, 0, 6.283185307179586);
   ctx.stroke();
   ctx.closePath();
 
   ctx.lineWidth = "2";
   ctx.strokeStyle = "red";
   for (let n = 0; n < nrOfVertices; ++n) {
-    x = lengthHalf + R * Math.cos(n*phi);
-    y = lengthHalf + R * Math.sin(n*phi);
+    x = vertices[n] ? vertices[n][0] : lengthHalf + R * Math.cos(n*phi);
+    y = vertices[n] ? vertices[n][1] : lengthHalf + R * Math.sin(n*phi);
 
     ctx.beginPath();
-    ctx.arc(x, y, 3, 0, 6.283185307179586)
+    ctx.arc(x, y, 3, 0, 6.283185307179586);
     ctx.stroke();
     ctx.closePath();
 
-    vertices.push([x, y]);
+    vertices[n] || vertices.push([x, y]);
   }
   [x, y] = vertices[Math.floor(Math.random() * nrOfVertices)];
 }
@@ -74,14 +74,14 @@ function step() {
           }
           break;
         case 2:
-          while (nextRand == (prevRand + nrOfVertices -1 ) % nrOfVertices) {
+          while (nextRand == (prevRand + nrOfVertices - 1 ) % nrOfVertices) {
             nextRand = Math.floor(Math.random() * nrOfVertices);
           }
           [nextX, nextY] = vertices[nextRand];
           prevRand = nextRand;
           break;
         case 3:
-          while (nextRand == (prevRand + nrOfVertices -2 ) % nrOfVertices) {
+          while (nextRand == (prevRand + nrOfVertices - 2 ) % nrOfVertices || nextRand == (prevRand + nrOfVertices + 2 ) % nrOfVertices) {
             nextRand = Math.floor(Math.random() * nrOfVertices);
           }
           [nextX, nextY] = vertices[nextRand];

@@ -49,15 +49,23 @@
 
       <div class="control-item">
         <header id="controls-sub-header">
-          Jumpratio
+          Jumpratio <span id="ratio"></span>
         </header>
         <div class="controls-wraper">
           <label for="jumpratio0"><input type="radio" id="jumpratio0" name="jumpratio" value=".5" checked> 1 / 2</label>
           <label for="jumpratio1"><input type="radio" id="jumpratio1" name="jumpratio" value=".666666666666666"> 2 / 3</label>
           <label for="jumpratio2"><input type="radio" id="jumpratio2" name="jumpratio" value=".618033988749894"> 1 / Phi</label>
-          <label></label>
+          <label for="custom-jumpratio"><input type="radio" id="custom-jumpratio" name="jumpratio" value="0"> Click</label>
         </div>
       </div>
+
+      <div class="control-item">
+        <header id="controls-sub-header">
+          Custom Vertices
+        </header>
+        <div class="controls-wraper">
+          <label for="custom-vertices"><input type="checkbox" id="custom-vertices" name="custom-vertices"> Click</label>
+        </div>
     </div>
   </body>
 </html>

@@ -23,6 +23,10 @@ canvas {
   font-size: 1.5rem;
 }
 
+#ratio {
+  font-size: 1.2rem;
+}
+
 .control-item + .control-item {
   margin-top: .5rem;
 }
