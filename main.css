@@ -8,14 +8,7 @@ body {
   background: linear-gradient(315deg, #00083e 0%, #3f0e22);
 }
 
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
 #controls {
-  z-index: 1;
   color: cadetblue;
 }
 
@@ -92,11 +85,6 @@ label::after {
 }
 
 @media (orientation: portrait) {
-  #controls {
-    padding-top: 100vw;
-    width: 100%;
-  }
-
   label {
     float: left;
     width: 25%;

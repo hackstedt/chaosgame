@@ -9,7 +9,8 @@ const vertices = [];
 var phi = 2 * Math.PI / nrOfVertices;
 var colorIncrement = 360 / nrOfVertices;
 
-const width = innerWidth, height = innerHeight;
+const width = document.getElementById('controls').offsetWidth;
+const height = innerHeight;
 const length = Math.min(width, height);
 const lengthHalf = length / 2;
 
