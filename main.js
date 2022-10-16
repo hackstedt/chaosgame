@@ -6,48 +6,42 @@ var coloring = 0;
 
 
 const vertices = [];
-var phi = 2 * Math.PI / nrOfVertices;
 var colorIncrement = 360 / nrOfVertices;
 
-const width = document.getElementById('controls').offsetWidth;
-const height = innerHeight;
-const length = Math.min(width, height);
-const lengthHalf = length / 2;
-
-const d = length * .95;
-const R = d / 2;
+const d = Math.min(document.body.clientWidth, innerHeight) - 6;
+const r = d / 2;
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-canvas.style.width = length + "px";
-canvas.style.height = length + "px";
-canvas.width = length;
-canvas.height = length;
+canvas.style.width = d + "px";
+canvas.style.height = d + "px";
+canvas.width = d;
+canvas.height = d;
 
 
 var prevRand, nextRand, prevX, prevY, nextX, nextY, x, y;
 
 
 function setup(resetVertices = true) {
-  phi = 2 * Math.PI / nrOfVertices;
+  const phi = 2 * Math.PI / nrOfVertices;
   colorIncrement = 360 / nrOfVertices;
   if (resetVertices) vertices.length = 0;
 
-  ctx.clearRect(0, 0, length, length);
+  ctx.clearRect(0, 0, d, d);
 
   ctx.beginPath();
   ctx.lineWidth = "1";
   ctx.strokeStyle = "blue";
-  ctx.arc(lengthHalf, lengthHalf, R, 0, 6.283185307179586);
+  ctx.arc(r, r, r, 0, 6.283185307179586);
   ctx.stroke();
   ctx.closePath();
 
   ctx.lineWidth = "2";
   ctx.strokeStyle = "red";
   for (let n = 0; n < nrOfVertices; ++n) {
-    x = vertices[n] ? vertices[n][0] : lengthHalf + R * Math.cos(n*phi);
-    y = vertices[n] ? vertices[n][1] : lengthHalf + R * Math.sin(n*phi);
+    x = vertices[n] ? vertices[n][0] : r + r * Math.cos(n*phi);
+    y = vertices[n] ? vertices[n][1] : r + r * Math.sin(n*phi);
 
     ctx.beginPath();
     ctx.arc(x, y, 3, 0, 6.283185307179586);
@@ -108,8 +102,6 @@ function step() {
         break;
     }
 
-    // x =(nextX - x) * jumpratio + lengthHalf;
-    // y =(nextY - y) * jumpratio + lengthHalf;
     x = x + (nextX - x) * jumpratio;
     y = y + (nextY - y) * jumpratio;
 

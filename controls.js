@@ -62,13 +62,13 @@ for (modifier of jumpratioModifier) {
 }
 
 document.getElementById("canvas").onclick = function() {
-  const cX = event.clientX;
-  const cY = event.clientY;
+  const cX = event.clientX - canvas.offsetLeft;
+  const cY = event.clientY - canvas.offsetTop;
   if (document.getElementById("custom-jumpratio").checked) {
-    const deltaX = Math.abs(lengthHalf - cX);
-    const deltaY = Math.abs(lengthHalf - cY);
+    const deltaX = Math.abs(d - cX);
+    const deltaY = Math.abs(d - cY);
     const delta = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-    jumpratio = delta / lengthHalf / .95;
+    jumpratio = delta / d;
     setup(false);
     document.getElementById("ratio").innerHTML = "(" + jumpratio.toFixed(3) + ")";
   }
