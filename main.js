@@ -8,7 +8,7 @@ var coloring = 0;
 const vertices = [];
 var colorIncrement = 360 / nrOfVertices;
 
-const d = Math.min(document.body.clientWidth, innerHeight) - 6;
+const d = Math.min(document.body.clientWidth, innerHeight);
 const r = d / 2;
 
 const canvas = document.getElementById("canvas");
@@ -32,19 +32,19 @@ function setup(resetVertices = true) {
 
   ctx.beginPath();
   ctx.lineWidth = "1";
-  ctx.strokeStyle = "blue";
+  ctx.strokeStyle = "darkblue";
   ctx.arc(r, r, r, 0, 6.283185307179586);
   ctx.stroke();
   ctx.closePath();
 
   ctx.lineWidth = "2";
-  ctx.strokeStyle = "red";
+  ctx.strokeStyle = "darkred";
   for (let n = 0; n < nrOfVertices; ++n) {
     x = vertices[n] ? vertices[n][0] : r + r * Math.cos(n*phi);
     y = vertices[n] ? vertices[n][1] : r + r * Math.sin(n*phi);
 
     ctx.beginPath();
-    ctx.arc(x, y, 3, 0, 6.283185307179586);
+    ctx.arc(x, y, 2, 0, 6.283185307179586);
     ctx.stroke();
     ctx.closePath();
 

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Chaosgame</title>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#13001c">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="main.js" defer></script>
     <script src="controls.js" defer></script>
@@ -12,18 +14,18 @@
 
     <div id="controls">
       <div class="control-item">
-        <header id="controls-sub-header">
+        <header class="control-sub-header">
           Nr. of Vertices
         </header>
         <div class="controls-wraper">
           <span class='minus nr-of-vertices-modifier' data-field='nrOfVertices' data-val='-1'>-</span>
-          <input type='text' name='nrOfVertices' value='3' class='nr-of-vertices' />
+          <input type='text' name='nrOfVertices' value='3' class='nr-of-vertices'>
           <span class='plus nr-of-vertices-modifier' data-field='nrOfVertices' data-val='1'>+</span>
         </div>
       </div>
 
       <div class="control-item">
-        <header id="controls-sub-header">
+        <header class="control-sub-header">
           Restriction
         </header>
         <div class="controls-wraper rules">
@@ -36,7 +38,7 @@
       </div>
 
       <div class="control-item">
-        <header id="controls-sub-header">
+        <header class="control-sub-header">
           Coloring
         </header>
         <div class="controls-wraper rules">
@@ -48,7 +50,7 @@
       </div>
 
       <div class="control-item">
-        <header id="controls-sub-header">
+        <header class="control-sub-header">
           Jumpratio <span id="ratio"></span>
         </header>
         <div class="controls-wraper rules">
@@ -60,12 +62,13 @@
       </div>
 
       <div class="control-item">
-        <header id="controls-sub-header">
+        <header class="control-sub-header">
           Custom Vertices
         </header>
         <div class="controls-wraper">
           <label for="custom-vertices"><input type="checkbox" id="custom-vertices" name="custom-vertices"> Click</label>
         </div>
+      </div>
     </div>
   </body>
 </html>

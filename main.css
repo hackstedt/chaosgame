@@ -9,7 +9,7 @@ body {
   align-items: center;
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(315deg, #00083e 0%, #3f0e22);
+  background: #13001c;
 }
 
 canvas {
@@ -22,7 +22,7 @@ canvas {
   color: cadetblue;
 }
 
-#controls-sub-header {
+.control-sub-header {
   font-size: 1.5rem;
 }
 
@@ -52,7 +52,6 @@ label:nth-of-type(odd) {
 
 .controls-wraper {
   padding: 5px;
-  text-align: center;
 }
 
 .nr-of-vertices {
@@ -77,10 +76,12 @@ label:nth-of-type(odd) {
   line-height: 0.7;
   background-color: white;
   border-radius: 4px;
+  text-align: center;
 }
 
 .minus.nr-of-vertices-modifier {
   line-height: 0.5;
+  margin-left: 5px;
 }
 
 fieldset {
