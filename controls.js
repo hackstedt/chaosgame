@@ -79,6 +79,9 @@ document.getElementById("canvas").onclick = function() {
     setup(false);
   }
 }
+  document.getElementById("somehow-different").onclick = function() {
+    setup(false);
+  }
 
 document.getElementById("custom-vertices").onclick = function(e) {
   document.getElementById("custom-jumpratio").checked = false;

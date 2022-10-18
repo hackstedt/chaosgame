@@ -20,10 +20,11 @@ canvas.width = d;
 canvas.height = d;
 
 
-var prevRand, nextRand, prevX, prevY, nextX, nextY, x, y;
+var prevRand, nextRand, prevX, prevY, nextX, nextY, x, y, somehowDifferent;
 
 
 function setup(resetVertices = true) {
+  somehowDifferent = document.getElementById("somehow-different").checked
   const phi = 2 * Math.PI / nrOfVertices;
   colorIncrement = 360 / nrOfVertices;
   if (resetVertices) vertices.length = 0;
@@ -50,7 +51,7 @@ function setup(resetVertices = true) {
 
     vertices[n] || vertices.push([x, y]);
   }
-  [x, y] = vertices[Math.floor(Math.random() * nrOfVertices)];
+  [prevX, prevY] = vertices[Math.floor(Math.random() * nrOfVertices)];
 }
 
 function step() {
@@ -95,19 +96,24 @@ function step() {
         ctx.fillStyle = "hsl(" + nextRand * colorIncrement + ", 80%, 50%)";
         break;
       case 2:
-        ctx.fillStyle = "hsl(" + (nextX - x)/d * 360 + ", 100%,"+ (nextY - y)/d * 100 + "%)";
+        ctx.fillStyle = "hsl(" + (nextX - prevX)/d * 360 + ", 100%,"+ (nextY - prevY)/d * 100 + "%)";
         break;
       case 3:
-        ctx.fillStyle = "hsl(" + Math.abs((nextX - x))/d * 360 + ", 100%,"+ Math.abs((nextY - y))/d * 100 + "%)";
+        ctx.fillStyle = "hsl(" + Math.abs((nextX - prevX))/d * 360 + ", 100%,"+ Math.abs((nextY - prevY))/d * 100 + "%)";
         break;
     }
 
-    x = x + (nextX - x) * jumpratio;
-    y = y + (nextY - y) * jumpratio;
-
-    ctx.fillRect(Math.floor(x),Math.floor(y),1,1);
-    prevX = nextX;
-    prevY = nextY;
+    if (somehowDifferent) {
+      x = x + (nextX - x) * jumpratio;
+      y = y + (nextY - y) * jumpratio;
+      ctx.fillRect(Math.floor(x),Math.floor(y),1,1);
+      prevX = nextX;
+      prevY = nextY;
+    } else {
+      prevX = prevX + (nextX - prevX) * jumpratio;
+      prevY = prevY + (nextY - prevY) * jumpratio;
+      ctx.fillRect(Math.floor(prevX),Math.floor(prevY),1,1);
+    }
   }
 }
 
