@@ -64,12 +64,10 @@ for (modifier of jumpratioModifier) {
 document.getElementById("canvas").onclick = function() {
   const cX = event.clientX - canvas.offsetLeft;
   const cY = event.clientY - canvas.offsetTop;
+
   if (document.getElementById("custom-jumpratio").checked) {
-    const deltaX = Math.abs(d - cX);
-    const deltaY = Math.abs(d - cY);
-    const delta = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-    jumpratio = delta / d;
-    setup(false);
+    jumpratio = cX / d;
+    needsSetup = true;
     document.getElementById("ratio").innerHTML = "(" + jumpratio.toFixed(3) + ")";
   }
 
