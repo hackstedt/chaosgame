@@ -20,6 +20,7 @@ canvas {
 #controls {
   margin: 1rem 1rem 1rem 3rem;
   color: cadetblue;
+  user-select: none;
 }
 
 .control-sub-header {
