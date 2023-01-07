@@ -1,4 +1,5 @@
 var nrOfVertices = 3;
+var prevNrOfVertices = 0;
 
 var jumpratio = .5;
 var rule = 0;
@@ -21,13 +22,18 @@ canvas.height = d;
 
 
 var prevRand, nextRand, prevX, prevY, nextX, nextY, x, y, somehowDifferent;
+var setupNeeded = true;
 
 
-function setup(resetVertices = true) {
-  somehowDifferent = document.getElementById("somehow-different").checked
+function setup() {
+  setupNeeded = false;
+
+  nrOfVertices = Number(document.getElementById("nrOfVertices").value);
   const phi = 2 * Math.PI / nrOfVertices;
+
+  somehowDifferent = document.getElementById("somehow-different").checked;
+
   colorIncrement = 360 / nrOfVertices;
-  if (resetVertices) vertices.length = 0;
 
   ctx.clearRect(0, 0, d, d);
 
@@ -38,8 +44,15 @@ function setup(resetVertices = true) {
   ctx.stroke();
   ctx.closePath();
 
+
+  if (!document.getElementById("custom-vertices").checked && prevNrOfVertices != nrOfVertices)
+    vertices.length = 0;
+
+  prevNrOfVertices = nrOfVertices;
+
   ctx.lineWidth = "2";
   ctx.strokeStyle = "darkred";
+
   for (let n = 0; n < nrOfVertices; ++n) {
     x = vertices[n] ? vertices[n][0] : r + r * Math.cos(n*phi);
     y = vertices[n] ? vertices[n][1] : r + r * Math.sin(n*phi);
@@ -51,12 +64,19 @@ function setup(resetVertices = true) {
 
     vertices[n] || vertices.push([x, y]);
   }
-  [prevX, prevY] = vertices[Math.floor(Math.random() * nrOfVertices)];
+
+  if (nrOfVertices > 1)
+    [prevX, prevY] = vertices[Math.floor(Math.random() * nrOfVertices)];
 }
 
 function step() {
+  if (setupNeeded)
+    setup();
 
   requestAnimationFrame(step);
+
+  if (nrOfVertices < 2)
+    return;
 
   for (let n = 0; ++n < 555;) {
     nextRand = Math.floor(Math.random() * nrOfVertices);
@@ -116,7 +136,5 @@ function step() {
     }
   }
 }
-
-setup();
 
 requestAnimationFrame(step);

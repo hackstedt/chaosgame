@@ -18,9 +18,9 @@
           Nr. of Vertices
         </header>
         <div class="controls-wraper">
-          <span class='minus nr-of-vertices-modifier' data-field='nrOfVertices' data-val='-1'>-</span>
-          <input type='text' name='nrOfVertices' value='3' class='nr-of-vertices'>
-          <span class='plus nr-of-vertices-modifier' data-field='nrOfVertices' data-val='1'>+</span>
+          <span class='minus nr-of-vertices-modifier' data-field='nrOfVertices' data-change='decrease'>-</span>
+          <input id='nrOfVertices' type='number' name='nrOfVertices' value='3' min='0' class='nr-of-vertices'>
+          <span class='plus nr-of-vertices-modifier' data-field='nrOfVertices' data-change='increase'>+</span>
         </div>
       </div>
 

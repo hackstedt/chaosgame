@@ -1,44 +1,38 @@
 const verticesModifier = document.getElementsByClassName("nr-of-vertices-modifier");
+const customVerticesCheckbox = document.getElementById("custom-vertices");
+const nrOfVerticesInput = document.getElementById("nrOfVertices");
+
 for (modifier of verticesModifier) {
   modifier.onclick = function() {
-    let field = this.dataset.field;
-    let modifierVal = this.dataset.val;
+    customVerticesCheckbox.checked = false;
+    setupNeeded = true;
 
-    let nrOfVerticesInput = document.getElementsByName(field)[0];
-    let currentVal = nrOfVerticesInput.value;
-
-    let newValue = Number(currentVal) + Number(modifierVal);
-    if (newValue > 1) {
-      nrOfVerticesInput.value = newValue;
-      nrOfVertices = newValue;
-      setup();
-
-      document.getElementById("custom-vertices").checked = false;
+    switch (this.dataset.change) {
+      case 'increase':
+        nrOfVerticesInput.stepUp();
+        break;
+      case 'decrease':
+        nrOfVerticesInput.stepDown();
+        break;
     }
   }
 }
 
-document.getElementsByName("nrOfVertices")[0].onkeyup = function() {
-  let newValue = this.value;
-  if (newValue > 1) {
-    nrOfVertices = newValue;
-    setup();
+document.getElementById("nrOfVertices").onchange = function() {
+  setupNeeded = true;
+}
 
-    document.getElementById("custom-vertices").checked = false;
-  } else if (newValue != "") {
-    this.value = 2;
-    nrOfVertices = 2;
-    setup();
-
-    document.getElementById("custom-vertices").checked = false;
-  }
+document.getElementById("nrOfVertices").onkeyup = function() {
+  customVerticesCheckbox.checked = false;
+  this.value = parseInt(this.value);
+  setupNeeded = true;
 }
 
 const ruleModifier = document.getElementsByName("rule");
 for (modifier of ruleModifier) {
   modifier.onclick = function() {
     rule = Number(this.value);
-    setup(false);
+    setupNeeded = true;
   }
 }
 
@@ -46,7 +40,7 @@ const coloringModifier = document.getElementsByName("coloring");
 for (modifier of coloringModifier) {
   modifier.onclick = function() {
     coloring = Number(this.value);
-    setup(false);
+    setupNeeded = true;
   }
 }
 
@@ -55,9 +49,17 @@ document.getElementById("ratio").innerHTML = "(" + jumpratio.toFixed(3) + ")";
 for (modifier of jumpratioModifier) {
   modifier.onclick = function() {
     jumpratio = Number(this.value);
-    setup(false);
+    setupNeeded = true;
     document.getElementById("ratio").innerHTML = "(" + jumpratio.toFixed(3) + ")";
-    if (this.id == "custom-jumpratio") document.getElementById("custom-vertices").checked = false;
+    if (this.id == "custom-jumpratio") {
+      customVerticesCheckbox.checked = false;
+      for (let i=0; i<1; i+=.1) {
+        setTimeout(()=>{
+          jumpratio = 1-i;
+          setupNeeded = true;
+        }, i*555);
+      }
+    }
   }
 }
 
@@ -67,20 +69,20 @@ document.getElementById("canvas").onclick = function() {
 
   if (document.getElementById("custom-jumpratio").checked) {
     jumpratio = cX / d;
-    needsSetup = true;
+    setupNeeded = true;
     document.getElementById("ratio").innerHTML = "(" + jumpratio.toFixed(3) + ")";
   }
 
-  if (document.getElementById("custom-vertices").checked) {
+  if (customVerticesCheckbox.checked) {
     vertices.push([cX, cY]);
-    nrOfVertices++;
-    setup(false);
+    nrOfVerticesInput.stepUp();
+    setupNeeded = true;
   }
 }
   document.getElementById("somehow-different").onclick = function() {
-    setup(false);
+    setupNeeded = true;
   }
 
-document.getElementById("custom-vertices").onclick = function(e) {
+customVerticesCheckbox.onclick = function(e) {
   document.getElementById("custom-jumpratio").checked = false;
 }
