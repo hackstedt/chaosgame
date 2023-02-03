@@ -86,3 +86,13 @@ document.getElementById("canvas").onclick = function() {
 customVerticesCheckbox.onclick = function(e) {
   document.getElementById("custom-jumpratio").checked = false;
 }
+
+function downloadImage() {
+ let link = document.createElement('a');
+ link.setAttribute('download', 'Chaosgame.png');
+ canvas.toBlob((blob) => {
+   let url = URL.createObjectURL(blob);
+   link.setAttribute('href', url);
+   link.click();
+ });
+}
