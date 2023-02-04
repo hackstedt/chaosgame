@@ -44,6 +44,24 @@ for (modifier of coloringModifier) {
   }
 }
 
+document.getElementById("bg-color-picker").onchange = function() {
+  bgColor = this.value;
+  document.body.style.backgroundColor = bgColor;
+  setupNeeded = true;
+}
+
+document.getElementById("fg-color-picker").onclick = function() {
+  document.getElementById("coloring0").checked = true;
+  coloring = 0;
+  setupNeeded = true;
+}
+
+document.getElementById("fg-color-picker").onchange = function() {
+  document.getElementById("coloring0").checked = true;
+  fgColor = this.value;
+  setupNeeded = true;
+}
+
 const jumpratioModifier = document.getElementsByName("jumpratio");
 document.getElementById("ratio").innerHTML = "(" + jumpratio.toFixed(3) + ")";
 for (modifier of jumpratioModifier) {
@@ -63,9 +81,9 @@ for (modifier of jumpratioModifier) {
   }
 }
 
-document.getElementById("canvas").onclick = function() {
-  const cX = event.clientX - canvas.offsetLeft;
-  const cY = event.clientY - canvas.offsetTop;
+document.getElementById("fg-canvas").onclick = function() {
+  const cX = event.clientX - this.getBoundingClientRect().left;
+  const cY = event.clientY - this.getBoundingClientRect().top;
 
   if (document.getElementById("custom-jumpratio").checked) {
     jumpratio = cX / d;
@@ -90,7 +108,7 @@ customVerticesCheckbox.onclick = function(e) {
 function downloadImage() {
  let link = document.createElement('a');
  link.setAttribute('download', 'Chaosgame.png');
- canvas.toBlob((blob) => {
+ bgCanvas.toBlob((blob) => {
    let url = URL.createObjectURL(blob);
    link.setAttribute('href', url);
    link.click();

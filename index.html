@@ -10,7 +10,10 @@
     <link rel="stylesheet" type="text/css" href="main.css">
   </head>
   <body>
-    <canvas id='canvas'></canvas>
+    <div id="canvas-wraper">
+      <canvas id='bg-canvas'></canvas>
+      <canvas id='fg-canvas'></canvas>
+    </div>
 
     <div id="controls">
       <div class="control-item">
@@ -41,8 +44,12 @@
         <header class="control-sub-header">
           Coloring
         </header>
-        <div class="controls-wraper rules">
-          <label for="coloring0"><input type="radio" id="coloring0" name="coloring" value="0" checked> Rule 0</label>
+        <div class="controls-wraper rules coloring">
+          <label for="bg-color-picker">Background<input type="color" value="#13001c" id="bg-color-picker"></label>
+          <label >
+            <input type="radio" id="coloring0" name="coloring" value="0" checked>
+            <input type="color" value="#e6e338" id="fg-color-picker">
+          </label >
           <label for="coloring1"><input type="radio" id="coloring1" name="coloring" value="1"> Rule 1</label>
           <label for="coloring2"><input type="radio" id="coloring2" name="coloring" value="2"> Rule 2</label>
           <label for="coloring3"><input type="radio" id="coloring3" name="coloring" value="3"> Rule 3</label>
